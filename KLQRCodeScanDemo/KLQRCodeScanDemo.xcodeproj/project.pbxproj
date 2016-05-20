@@ -30,7 +30,7 @@
 		CE4E7C211CE979EB00BD3528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE4E7C2C1CE97C0700BD3528 /* ZKLQRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLQRCodeScanViewController.h; sourceTree = "<group>"; };
 		CE4E7C2D1CE97C0700BD3528 /* ZKLQRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLQRCodeScanViewController.m; sourceTree = "<group>"; };
-		CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,6 @@
 		CE4E7C041CE979EA00BD3528 = {
 			isa = PBXGroup;
 			children = (
-				CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */,
 				CE4E7C0F1CE979EA00BD3528 /* KLQRCodeScanDemo */,
 				CE4E7C0E1CE979EA00BD3528 /* Products */,
 			);
@@ -76,6 +75,7 @@
 				CE4E7C191CE979EB00BD3528 /* Main.storyboard */,
 				CE4E7C1C1CE979EB00BD3528 /* Assets.xcassets */,
 				CE4E7C1E1CE979EB00BD3528 /* LaunchScreen.storyboard */,
+				CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */,
 				CE4E7C211CE979EB00BD3528 /* Info.plist */,
 				CE4E7C101CE979EA00BD3528 /* Supporting Files */,
 			);
@@ -353,6 +353,7 @@
 				CE4E7C261CE979EB00BD3528 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
