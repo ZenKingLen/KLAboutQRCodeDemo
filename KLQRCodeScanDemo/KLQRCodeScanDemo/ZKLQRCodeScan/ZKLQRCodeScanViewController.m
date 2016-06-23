@@ -98,5 +98,18 @@
     [self.session startRunning];
 }
 
+#pragma mark - AVCaptureMetadataOutputObjectsDelegate
+
+// 扫描二维码
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    // 判断是否存在数据
+    if (metadataObjects.count > 0) {
+        AVMetadataMachineReadableCodeObject *obj = [metadataObjects lastObject];
+        // 二维码扫描信息处理
+        NSLog(@"obj --> %@", obj);
+    }
+}
+
+
 
 @end

@@ -9,6 +9,14 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ZKLQRCodeScanViewController.h"
+#import "UIImage+KLCreateClearnessImage.h"
+// 保存到本地需要使用该库
+#import <Photos/Photos.h>
+// 保存到本地相册需要导入的库
+#import <QuartzCore/QuartzCore.h>
+
+#define kScreenHeight   [UIScreen mainScreen].bounds.size.height
+#define kScreenWidth    [UIScreen mainScreen].bounds.size.width
 
 @interface ViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -20,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *createQRCodeButton;
 @property (weak, nonatomic) IBOutlet UIButton *createHDQRCodeButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveToLocalAlbumButton;
+/// 加载生成的二维码
+@property (nonatomic, strong) UIImageView *codeImageView;
 
 @end
 
@@ -27,19 +37,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // 初始化按钮
-    // 12
     [self.scanQRCodeButton addTarget: self action: @selector(scanQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.scanLocalButton addTarget: self action: @selector(scanLocalQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.createQRCodeButton addTarget: self action: @selector(createQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.createHDQRCodeButton addTarget: self action: @selector(createHDQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.saveToLocalAlbumButton addTarget: self action: @selector(saveQRCodeToAlbum) forControlEvents: UIControlEventTouchUpInside];
+    self.codeImageView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - Scan QRCode                          二维码扫描
@@ -91,8 +100,7 @@
             pickerVC.delegate = self;
             // 转场动画
             pickerVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            //            [self presentViewController: pickerVC animated: YES completion: nil];
-            [self.navigationController pushViewController: pickerVC animated: YES];
+            [self presentViewController: pickerVC animated: YES completion: nil];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"提示" message: @"未知原因, 打开相册失败" delegate: nil cancelButtonTitle: @"知道了" otherButtonTitles: nil];
             alert.delegate = self;
@@ -117,7 +125,7 @@
             CIQRCodeFeature *feature = [result objectAtIndex: 0];
             NSString *obj = feature.messageString;
             // 二维码信息处理
-            NSLog(@"obj: %@", obj);
+            NSLog(@"读取到的二维码数据 ---> obj: %@", obj);
         }
     }];
 }
@@ -126,20 +134,68 @@
 #pragma mark - create QRCode                        生成二维码
 
 - (void) createQRCode {
-    
+
 }
 
 #pragma mark - create HDQRCode                      生成高清的二维码
 
 - (void) createHDQRCode {
-    
+    // 点击空白处会隐藏
+    self.codeImageView.hidden = NO;
+    // 需要转成二进制的字符串
+    NSString *codeParams = @"二维码";
+    // 生成二维码 (调用已经封装好的二维码生成扩展)
+    self.codeImageView.image = [UIImage createClearnessImageWithString: codeParams withLength: kScreenWidth];
 }
 
 #pragma mark - save QRCode to local album           保存二维码到本地相册
 
 - (void) saveQRCodeToAlbum {
-    
+    self.codeImageView.hidden = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.codeImageView.hidden = YES;
+    });
+    // 保存到本地需要使用该库      #import <Photos/Photos.h>
+    PHAuthorizationStatus photoStatus = [PHPhotoLibrary authorizationStatus];
+    CGFloat version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (version >= 8.0) {
+        if (photoStatus == PHAuthorizationStatusNotDetermined | photoStatus == PHAuthorizationStatusAuthorized) {
+            // 保存到本地相册
+            UIGraphicsBeginImageContext(self.codeImageView.bounds.size);
+            [self.codeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        } else {
+            NSLog(@"无相册访问权限");
+        }
+    } else {
+            // 保存到本地相册
+            UIGraphicsBeginImageContext(self.codeImageView.bounds.size);
+            [self.codeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.codeImageView.hidden = YES;
+}
+
+#pragma mark - lazzy loading    懒加载
+
+- (UIImageView *)codeImageView {
+	if(_codeImageView == nil) {
+        CGFloat w = 180;
+        CGFloat h = 180;
+		_codeImageView = [[UIImageView alloc] initWithFrame: CGRectMake(kScreenWidth/2 - 90, 200, w, h)];
+        _codeImageView.layer.borderWidth = 1;
+        _codeImageView.layer.borderColor = [UIColor orangeColor].CGColor;
+        _codeImageView.layer.cornerRadius = 2;
+        [self.view addSubview: _codeImageView];
+	}
+	return _codeImageView;
+}
 
 @end

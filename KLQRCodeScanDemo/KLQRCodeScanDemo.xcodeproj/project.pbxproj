@@ -15,6 +15,7 @@
 		CE4E7C201CE979EB00BD3528 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4E7C1E1CE979EB00BD3528 /* LaunchScreen.storyboard */; };
 		CE4E7C2E1CE97C0700BD3528 /* ZKLQRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4E7C2D1CE97C0700BD3528 /* ZKLQRCodeScanViewController.m */; };
 		CE4E7C331CE99E3000BD3528 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */; };
+		CE64A6411D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE64A6401D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		CE4E7C2C1CE97C0700BD3528 /* ZKLQRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLQRCodeScanViewController.h; sourceTree = "<group>"; };
 		CE4E7C2D1CE97C0700BD3528 /* ZKLQRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLQRCodeScanViewController.m; sourceTree = "<group>"; };
 		CE4E7C321CE99E3000BD3528 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		CE64A63F1D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KLCreateClearnessImage.h"; sourceTree = "<group>"; };
+		CE64A6401D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KLCreateClearnessImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +68,8 @@
 			children = (
 				CE4E7C131CE979EB00BD3528 /* AppDelegate.h */,
 				CE4E7C141CE979EB00BD3528 /* AppDelegate.m */,
+				CE64A63E1D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage */,
 				CE4E7C281CE97B9400BD3528 /* ZKLCreateHDQRCode */,
-				CE4E7C291CE97B9400BD3528 /* ZKLCreateQRCode */,
-				CE4E7C2A1CE97B9400BD3528 /* ZKLQRCodeLocalScan */,
-				CE4E7C2B1CE97B9400BD3528 /* ZKLSaveQRCodeToLocalAlbum */,
 				CE4E7C271CE97A4F00BD3528 /* ZKLQRCodeScan */,
 				CE4E7C161CE979EB00BD3528 /* ViewController.h */,
 				CE4E7C171CE979EB00BD3528 /* ViewController.m */,
@@ -106,25 +107,13 @@
 			path = ZKLCreateHDQRCode;
 			sourceTree = "<group>";
 		};
-		CE4E7C291CE97B9400BD3528 /* ZKLCreateQRCode */ = {
+		CE64A63E1D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage */ = {
 			isa = PBXGroup;
 			children = (
+				CE64A63F1D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.h */,
+				CE64A6401D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.m */,
 			);
-			path = ZKLCreateQRCode;
-			sourceTree = "<group>";
-		};
-		CE4E7C2A1CE97B9400BD3528 /* ZKLQRCodeLocalScan */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ZKLQRCodeLocalScan;
-			sourceTree = "<group>";
-		};
-		CE4E7C2B1CE97B9400BD3528 /* ZKLSaveQRCodeToLocalAlbum */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ZKLSaveQRCodeToLocalAlbum;
+			path = "UIImage+KLCreateClearnessImage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +191,7 @@
 				CE4E7C181CE979EB00BD3528 /* ViewController.m in Sources */,
 				CE4E7C151CE979EB00BD3528 /* AppDelegate.m in Sources */,
 				CE4E7C121CE979EB00BD3528 /* main.m in Sources */,
+				CE64A6411D1BEABC004E36A8 /* UIImage+KLCreateClearnessImage.m in Sources */,
 				CE4E7C2E1CE97C0700BD3528 /* ZKLQRCodeScanViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
