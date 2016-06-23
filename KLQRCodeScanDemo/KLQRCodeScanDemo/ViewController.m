@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     // 初始化按钮
+    // 12
     [self.scanQRCodeButton addTarget: self action: @selector(scanQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.scanLocalButton addTarget: self action: @selector(scanLocalQRCode) forControlEvents: UIControlEventTouchUpInside];
     [self.createQRCodeButton addTarget: self action: @selector(createQRCode) forControlEvents: UIControlEventTouchUpInside];
